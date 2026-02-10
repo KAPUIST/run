@@ -1682,16 +1682,18 @@
           <div class="phone-screen">
             <!-- AI Style Slideshow -->
             <div class="phone-slideshow">
-              <img src="images/style-catface.png" class="phone-slide active" alt="고양이 변신">
+              <img src="images/style-webtoon.png" class="phone-slide active" alt="웹툰 스타일">
+              <img src="images/style-catface.png" class="phone-slide" alt="고양이 변신">
               <img src="images/style-comic.png" class="phone-slide" alt="만화 스타일">
               <img src="images/style-magazine.png" class="phone-slide" alt="매거진 커버">
               <img src="images/style-nike.png" class="phone-slide" alt="나이키 룩">
               <img src="images/style-crayon.png" class="phone-slide" alt="크레용 그림">
               <img src="images/style-minecraft.png" class="phone-slide" alt="마인크래프트">
             </div>
-            <div class="phone-slide-label" id="slideLabel">고양이 변신</div>
+            <div class="phone-slide-label" id="slideLabel">웹툰 스타일</div>
             <div class="phone-slide-indicator" id="slideIndicator">
               <span class="slide-dot active"></span>
+              <span class="slide-dot"></span>
               <span class="slide-dot"></span>
               <span class="slide-dot"></span>
               <span class="slide-dot"></span>
@@ -1753,7 +1755,21 @@
     <div class="tpl-scroll-wrap">
       <div class="tpl-gallery" id="tplGallery">
 
-        <!-- #1 고양이 변신 -->
+        <!-- #1 웹툰 스타일 -->
+        <div class="tpl-card reveal">
+          <div class="tpl-phone">
+            <div class="tpl-screen tpl-screen--img">
+              <img src="images/style-webtoon.png" class="tpl-img" alt="웹툰 스타일" loading="lazy">
+              <span class="tpl-style-badge">AI Generated</span>
+            </div>
+          </div>
+          <div class="tpl-meta">
+            <span class="tpl-name">웹툰 스타일</span>
+            <span class="tpl-tag tpl-tag--hot">NEW</span>
+          </div>
+        </div>
+
+        <!-- #2 고양이 변신 -->
         <div class="tpl-card reveal">
           <div class="tpl-phone">
             <div class="tpl-screen tpl-screen--img">
@@ -1908,7 +1924,7 @@
     createSpeedLines();
 
     // ═══════════ PHONE IMAGE SLIDESHOW ═══════════
-    const slideNames = ['고양이 변신', '만화 스타일', '매거진 커버', '나이키 룩', '크레용 그림', '마인크래프트'];
+    const slideNames = ['웹툰 스타일', '고양이 변신', '만화 스타일', '매거진 커버', '나이키 룩', '크레용 그림', '마인크래프트'];
     const slides = document.querySelectorAll('.phone-slide');
     const dots = document.querySelectorAll('.slide-dot');
     const slideLabel = document.getElementById('slideLabel');
@@ -2068,6 +2084,7 @@
     const lightboxImg = document.getElementById('lightboxImg');
     const lightboxCaption = document.getElementById('lightboxCaption');
     const allImages = [
+      { src: 'images/style-webtoon.png', name: '웹툰 스타일' },
       { src: 'images/style-catface.png', name: '고양이 변신' },
       { src: 'images/style-comic.png', name: '만화 스타일' },
       { src: 'images/style-magazine.png', name: '매거진 커버' },
