@@ -1238,95 +1238,6 @@
       font-weight: 300;
     }
 
-    /* ═══════════ NOTIFY FORM ═══════════ */
-    .notify-section {
-      border-top: 1px solid var(--border);
-      background: linear-gradient(180deg, transparent, rgba(255, 77, 0, 0.02));
-    }
-
-    .notify-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-    }
-
-    .notify-form {
-      display: flex;
-      gap: 0.75rem;
-      margin-top: 2rem;
-      width: 100%;
-      max-width: 460px;
-    }
-
-    .notify-input {
-      flex: 1;
-      padding: 0.9rem 1.25rem;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      color: var(--text-primary);
-      font-family: var(--font-body);
-      font-size: 0.9rem;
-      outline: none;
-      transition: border-color 0.2s;
-    }
-
-    .notify-input::placeholder {
-      color: var(--text-dim);
-    }
-
-    .notify-input:focus {
-      border-color: var(--accent-primary);
-    }
-
-    .notify-btn {
-      padding: 0.9rem 1.5rem;
-      background: var(--accent-primary);
-      color: white;
-      border: none;
-      border-radius: 12px;
-      font-family: var(--font-body);
-      font-weight: 700;
-      font-size: 0.9rem;
-      cursor: pointer;
-      transition: all 0.2s;
-      white-space: nowrap;
-    }
-
-    .notify-btn:hover {
-      background: var(--accent-glow);
-      transform: translateY(-1px);
-    }
-
-    .notify-btn:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-      transform: none;
-    }
-
-    .notify-success {
-      display: none;
-      margin-top: 1.5rem;
-      padding: 1rem 1.5rem;
-      background: var(--accent-green-dim);
-      border: 1px solid rgba(0, 232, 120, 0.2);
-      border-radius: 12px;
-      color: var(--accent-green);
-      font-size: 0.9rem;
-      animation: fadeUp 0.3s ease-out;
-    }
-
-    .notify-success.show {
-      display: block;
-    }
-
-    .notify-privacy {
-      margin-top: 1rem;
-      font-size: 0.75rem;
-      color: var(--text-dim);
-    }
-
     /* ═══════════ FOOTER ═══════════ */
     footer {
       position: relative;
@@ -1424,10 +1335,6 @@
         min-width: 0;
       }
 
-      .notify-form {
-        flex-direction: column;
-      }
-
       .footer-inner {
         flex-direction: column;
         gap: 1rem;
@@ -1461,9 +1368,12 @@
       inset: 0;
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
       opacity: 0;
       transition: opacity 1s ease;
+      user-select: none;
+      -webkit-user-drag: none;
+      pointer-events: none;
     }
 
     .phone-slide.active {
@@ -1714,8 +1624,16 @@
     .lightbox-next { right: 16px; }
 
     /* Make clickable images show pointer */
-    .tpl-img, .phone-slide {
+    .tpl-img {
       cursor: zoom-in;
+    }
+
+    .phone-screen {
+      cursor: grab;
+    }
+
+    .phone-screen:active {
+      cursor: grabbing;
     }
   </style>
 </head>
@@ -1947,38 +1865,8 @@
 
         <div class="vote-result" id="voteResult">
           <p class="vote-thanks">관심 감사합니다!</p>
-          <p class="vote-thanks-sub">이메일 남기시면 가장 먼저 알려드릴게요.</p>
+          <p class="vote-thanks-sub">출시되면 가장 먼저 알려드릴게요!</p>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Notify Section -->
-  <section class="notify-section" id="notify">
-    <div class="section-inner">
-      <div class="notify-container">
-        <span class="section-label">stay updated</span>
-        <h2 class="section-title">출시 알림 받기</h2>
-        <p class="section-desc" style="text-align: center; margin: 0 auto;">
-          가장 먼저 <strong style="color: var(--accent-primary);">뛰어</strong>를 경험해보세요.
-        </p>
-
-        <form class="notify-form" id="notifyForm" onsubmit="handleNotify(event)">
-          <input
-            type="email"
-            class="notify-input"
-            placeholder="이메일 주소를 입력하세요"
-            required
-            id="emailInput"
-          >
-          <button type="submit" class="notify-btn" id="notifyBtn">알림 신청</button>
-        </form>
-
-        <div class="notify-success" id="notifySuccess">
-          출시되면 가장 먼저 알려드릴게요! 🏃‍♂️
-        </div>
-
-        <p class="notify-privacy">스팸은 보내지 않습니다. 약속합니다.</p>
       </div>
     </div>
   </section>
@@ -2000,6 +1888,7 @@
     </div>
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <script>
     // ═══════════ SPEED LINES ═══════════
     function createSpeedLines() {
@@ -2050,6 +1939,51 @@
       });
     });
 
+    // Swipe / drag / tap on phone screen
+    const phoneScreen = document.querySelector('.phone-screen');
+    let startX = 0;
+    let dragging = false;
+
+    // Touch (mobile)
+    phoneScreen.addEventListener('touchstart', (e) => {
+      startX = e.changedTouches[0].screenX;
+      clearInterval(slideInterval);
+    }, { passive: true });
+
+    phoneScreen.addEventListener('touchend', (e) => {
+      const diff = startX - e.changedTouches[0].screenX;
+      if (Math.abs(diff) > 40) {
+        goToSlide((currentSlide + (diff > 0 ? 1 : -1) + slides.length) % slides.length);
+      } else {
+        // Tap → lightbox
+        const active = document.querySelector('.phone-slide.active');
+        if (active) openLightbox(active.src, active.alt);
+      }
+      slideInterval = setInterval(nextSlide, 3000);
+    }, { passive: true });
+
+    // Mouse (desktop)
+    phoneScreen.addEventListener('mousedown', (e) => {
+      dragging = true;
+      startX = e.clientX;
+      clearInterval(slideInterval);
+      e.preventDefault();
+    });
+
+    document.addEventListener('mouseup', (e) => {
+      if (!dragging) return;
+      dragging = false;
+      const diff = startX - e.clientX;
+      if (Math.abs(diff) > 40) {
+        goToSlide((currentSlide + (diff > 0 ? 1 : -1) + slides.length) % slides.length);
+      } else {
+        // Click → lightbox
+        const active = document.querySelector('.phone-slide.active');
+        if (active) openLightbox(active.src, active.alt);
+      }
+      slideInterval = setInterval(nextSlide, 3000);
+    });
+
     // ═══════════ SCROLL REVEAL ═══════════
     const reveals = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver((entries) => {
@@ -2062,63 +1996,71 @@
 
     reveals.forEach(el => observer.observe(el));
 
-    // ═══════════ VOTE ═══════════
-    let votes = { yes: 0, maybe: 0 };
-
-    // Load from localStorage
-    const savedVotes = localStorage.getItem('ttwi-votes');
-    if (savedVotes) {
-      votes = JSON.parse(savedVotes);
-      document.getElementById('countYes').textContent = `${votes.yes} votes`;
+    // ═══════════ SUPABASE + VOTE ═══════════
+    let sb = null;
+    try {
+      sb = window.supabase.createClient(
+        'https://brvfzbamocpmqofyxpeq.supabase.co',
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJydmZ6YmFtb2NwbXFvZnl4cGVxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA3MTQyNjUsImV4cCI6MjA4NjI5MDI2NX0.fTaNYaSfNaubr94Ji5dOOKEYfAf76IU1PeOYlkm1XL0'
+      );
+    } catch (e) {
+      console.warn('Supabase init failed:', e);
     }
 
+    // Load vote count from Supabase
+    async function loadVoteCount() {
+      if (!sb) return;
+      try {
+        const { count, error } = await sb
+          .from('votes')
+          .select('*', { count: 'exact', head: true });
+
+        if (!error && count !== null) {
+          document.getElementById('countYes').textContent = `${count} votes`;
+        }
+      } catch (e) {
+        console.warn('Load votes failed:', e);
+      }
+    }
+    loadVoteCount();
+
+    // Check if already voted (localStorage for duplicate prevention)
     const hasVoted = localStorage.getItem('ttwi-voted');
     if (hasVoted) {
       document.querySelectorAll('.vote-btn').forEach(btn => {
         btn.classList.add('voted');
-        if (btn.dataset.vote === hasVoted) {
-          btn.style.transform = 'scale(1.02)';
-        }
       });
       document.getElementById('voteResult').classList.add('show');
     }
 
-    function handleVote(type) {
+    async function handleVote(type) {
       if (localStorage.getItem('ttwi-voted')) return;
 
-      votes[type]++;
-      localStorage.setItem('ttwi-votes', JSON.stringify(votes));
-      localStorage.setItem('ttwi-voted', type);
+      // Insert to Supabase
+      if (sb) {
+        try {
+          const { error } = await sb
+            .from('votes')
+            .insert({ vote_type: type });
 
-      document.getElementById('countYes').textContent = `${votes.yes} votes`;
+          if (error) {
+            console.error('Vote error:', error);
+            return;
+          }
+        } catch (e) {
+          console.error('Vote failed:', e);
+          return;
+        }
+      }
+
+      localStorage.setItem('ttwi-voted', type);
 
       document.querySelectorAll('.vote-btn').forEach(btn => {
         btn.classList.add('voted');
       });
 
       document.getElementById('voteResult').classList.add('show');
-
-      // Smooth scroll to notify
-      setTimeout(() => {
-        document.getElementById('notify').scrollIntoView({ behavior: 'smooth' });
-      }, 800);
-    }
-
-    // ═══════════ NOTIFY ═══════════
-    function handleNotify(e) {
-      e.preventDefault();
-      const email = document.getElementById('emailInput').value;
-      const btn = document.getElementById('notifyBtn');
-
-      // Save email locally (replace with actual backend later)
-      const emails = JSON.parse(localStorage.getItem('ttwi-emails') || '[]');
-      emails.push({ email, timestamp: new Date().toISOString() });
-      localStorage.setItem('ttwi-emails', JSON.stringify(emails));
-
-      btn.disabled = true;
-      btn.textContent = '완료!';
-      document.getElementById('notifySuccess').classList.add('show');
-      document.getElementById('notifyForm').style.display = 'none';
+      loadVoteCount();
     }
 
     // ═══════════ LIGHTBOX ═══════════
@@ -2183,13 +2125,6 @@
       if (e.key === 'Escape') closeLightbox();
       if (e.key === 'ArrowLeft') lightboxNav(-1);
       if (e.key === 'ArrowRight') lightboxNav(1);
-    });
-
-    // Attach click to phone slideshow images
-    document.querySelectorAll('.phone-slide').forEach(img => {
-      img.addEventListener('click', () => {
-        openLightbox(img.src, img.alt);
-      });
     });
 
     // Attach click to gallery template images

@@ -1,4 +1,31 @@
+# OS
 .DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Claude
 CLAUDE.md
+
+# Duplicates
 *.복사본.*
+
+# Dependencies
+node_modules/
+.vercel/
+
+# Environment
+.env
+.env.local
+.env.production
+.env*.local
+
+# Build
 mvp/
+dist/
+.next/
+out/
