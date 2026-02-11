@@ -160,4 +160,127 @@ Do NOT add Animal Crossing characters (villagers, Tom Nook) to the scene.`,
     },
     outputFormat: { aspectRatio: '9:16' as const, style: 'illustration' as const },
   },
+  gta: {
+    id: 'gta',
+    name: 'GTA',
+    nameEn: 'Grand Theft Auto',
+    sections: {
+      role: 'You are a Rockstar Games illustrator creating GTA V loading screen artwork.',
+      transform: `Transform the entire photo into Grand Theft Auto V loading screen illustration style.
+Use angular, stylized illustration with bold outlines and painterly brushstrokes.
+Highly saturated colors with strong contrast and dramatic lighting.
+Skin tones should have the signature GTA warm orange/brown cast.
+The background should be simplified and stylized like a GTA promotional poster.
+The overall feel should be a widescreen cinematic movie poster meets comic book illustration.`,
+      preserve: `Exact poses and body positioning of all people.
+Clothing and accessories translated into the GTA illustration style.
+General environment/location recognizable but stylized.
+Number of people and their relative positions.`,
+      typography: `GTA-style HUD typography:
+- "{distance} KM" in large bold condensed sans-serif (like Pricedown or similar GTA font), top area
+- "PACE {pace} | TIME {time}" in smaller GTA HUD-style font at bottom
+- Style it like a mission completion screen: "MISSION PASSED" aesthetic
+- White or yellow text with dark outline for readability
+- The text should feel like it belongs in the GTA game UI`,
+      constraints: `Do NOT make it look like a generic digital painting — it must specifically reference GTA's angular illustration style.
+Do NOT use soft gradients or watercolor effects.
+Do NOT change the people's poses or add weapons/violence.
+Do NOT make it look like GTA IV or older GTA styles — specifically GTA V's clean modern look.`,
+    },
+    outputFormat: { aspectRatio: '9:16' as const, style: 'illustration' as const },
+  },
+  pixel: {
+    id: 'pixel',
+    name: '픽셀아트',
+    nameEn: 'Pixel Art',
+    sections: {
+      role: 'You are a retro game pixel artist creating NES/SNES era game screenshots.',
+      transform: `Transform the entire scene into authentic 8-bit/16-bit pixel art.
+Use a limited color palette (maximum 16-24 colors).
+All shapes must be made of clearly visible large square pixels — no anti-aliasing, no smooth edges.
+People become pixel art character sprites (like classic RPG/platformer characters) wearing pixelated versions of their real clothing.
+Background becomes a retro game environment: pixel clouds, pixel trees, tiled ground.
+The composition should look like a screenshot from a side-scrolling platformer or top-down RPG.`,
+      preserve: `Number of characters and their general poses.
+Clothing colors and patterns translated into pixel-art color blocks.
+General scene layout and environment type.
+Time of day (use appropriate pixel-art sky colors).`,
+      typography: `Retro game HUD text:
+- "{distance} KM" in large pixel font (like classic arcade high-score display), upper area
+- "PACE {pace} | TIME {time}" in smaller pixel font below
+- White or bright yellow pixel text on a semi-transparent dark bar
+- Style like a retro game score/status bar or a "STAGE CLEAR" screen
+- Each letter should be made of clearly visible pixel blocks`,
+      constraints: `Do NOT use any smooth curves or gradients — every edge must be pixelated.
+Do NOT use more than 24 colors in the entire image.
+Do NOT make it look like modern pixel art with HD resolution — keep it authentically retro and chunky.
+Do NOT blend the pixel art style with photorealism.`,
+    },
+    outputFormat: { aspectRatio: '9:16' as const, style: 'pixel' as const },
+  },
+  magazine: {
+    id: 'magazine',
+    name: '잡지 1면',
+    nameEn: 'Magazine Cover',
+    sections: {
+      role: 'You are an editorial illustrator and magazine art director creating a high-fashion sports magazine cover.',
+      transform: `Transform the entire image into a fashion editorial illustration.
+Use bold ink strokes combined with fashion illustration technique — NOT a photograph.
+People should be rendered with stylized elongated proportions like Vogue fashion sketches.
+The illustration style: confident ink lines, selective watercolor washes, high-contrast dramatic lighting.
+Background becomes a clean editorial layout — simplified, elegant, with ample negative space.
+The overall piece should look like it belongs on the cover of Vogue or Runner's World.`,
+      preserve: `The same clothing on each person (translated into fashion illustration style).
+General poses recognizable from the original.
+The mood and energy of the original moment.
+Number of people and their composition.`,
+      typography: `Magazine cover typography with mixed font weights:
+- "TODAY'S RUN" in elegant widely-spaced uppercase at the very top, with a thin horizontal rule below
+- "{distance} KM" in MASSIVE ultra-bold sans-serif font, dominating the center
+- "PACE {pace} | TIME {time}" in small refined lightweight text near the bottom
+- "{date}" in italic serif, small, lower corner
+- All text in white or off-white for elegance
+- Use dramatic contrast between ultra-bold headlines and thin body text
+- The typography layout must follow real magazine cover design principles`,
+      constraints: `Do NOT keep the photo realistic — the entire image must be an editorial illustration.
+Do NOT make the text look pasted on top of a photo.
+Do NOT use bright saturated colors — keep an elegant limited palette (2-3 accent colors max).
+Do NOT add real magazine logos or brand names.
+Do NOT make the illustration look like a cartoon or comic — it should feel high-fashion and sophisticated.`,
+    },
+    outputFormat: { aspectRatio: '9:16' as const, style: 'editorial' as const },
+  },
+  nike: {
+    id: 'nike',
+    name: '나이키 셀럽',
+    nameEn: 'Nike Victory',
+    sections: {
+      role: 'You are a Nike campaign photographer and photo compositor creating a "Just Do It" hero moment.',
+      transform: `Transform the runner's pose into a dramatic victory celebration:
+- Arms spread wide open to both sides, chest lifted up, head tilted slightly back
+- Feet firmly planted on the ground in a powerful confident stance
+- The body language should scream "I conquered this run!" — triumphant and free
+Slightly enhance the background to feel more scenic and cinematic (subtle golden-hour glow, deeper sky, more dramatic clouds).
+The overall mood: victorious, free, cinematic — a Nike advertisement hero shot.
+Bright vivid colors with cinematic color grading.`,
+      preserve: `The runner's EXACT face, hair, skin tone — must be clearly recognizable as the same person.
+The runner's exact clothing, shoes, and accessories — every detail identical.
+The general background environment (but cinematically enhanced).
+The runner's body type and physical characteristics.`,
+      typography: `Bold Nike-campaign-style typography:
+- "{distance} KM" in MASSIVE ultra-bold clean sans-serif (like Futura Heavy or Helvetica Neue Black)
+- Color: warm coral-red (#FF6B5A or similar)
+- CRITICAL LAYERING: The text must be placed BEHIND the runner's body — the runner appears IN FRONT of the text, overlapping it
+- The text should fill most of the frame width (80%+)
+- "PACE {pace} | TIME {time}" in same coral-red, smaller, at the bottom of frame
+- Clean typography only — no outlines, no shadows, no effects on the text`,
+      constraints: `Do NOT change the runner's face — it must be instantly recognizable.
+Do NOT change the runner's clothing or shoes.
+Do NOT place the text in front of the runner — the runner must overlap the text.
+Do NOT add any Nike logos, swoosh marks, or brand elements.
+Do NOT make the pose look unnatural or anatomically impossible.
+Do NOT crop or zoom differently from the original — maintain the full figure.`,
+    },
+    outputFormat: { aspectRatio: '9:16' as const, style: 'photo-overlay' as const },
+  },
 };
