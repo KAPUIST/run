@@ -1253,6 +1253,7 @@
 
     .notify-form {
       display: flex;
+      flex-direction: column;
       gap: 0.75rem;
       margin-top: 2rem;
       width: 100%;
@@ -1994,11 +1995,25 @@
 
         <form class="notify-form" id="notifyForm">
           <input
+            type="text"
+            class="notify-input"
+            placeholder="이름"
+            required
+            id="nameInput"
+          >
+          <input
             type="email"
             class="notify-input"
-            placeholder="이메일 주소를 입력하세요"
+            placeholder="이메일"
             required
             id="emailInput"
+          >
+          <input
+            type="tel"
+            class="notify-input"
+            placeholder="전화번호 (010-0000-0000)"
+            required
+            id="phoneInput"
           >
           <button type="submit" class="notify-btn" id="notifyBtn">알림 신청</button>
         </form>
@@ -2207,7 +2222,9 @@
     // ═══════════ EMAIL NOTIFY ═══════════
     document.getElementById('notifyForm').addEventListener('submit', async (e) => {
       e.preventDefault();
+      const name = document.getElementById('nameInput').value;
       const email = document.getElementById('emailInput').value;
+      const phone = document.getElementById('phoneInput').value;
       const btn = document.getElementById('notifyBtn');
 
       btn.disabled = true;
@@ -2217,7 +2234,7 @@
         try {
           const { error } = await sb
             .from('emails')
-            .insert({ email });
+            .insert({ name, email, phone });
 
           if (error) {
             console.error('Email error:', error);
