@@ -1238,6 +1238,101 @@
       font-weight: 300;
     }
 
+    /* ═══════════ NOTIFY FORM ═══════════ */
+    .notify-section {
+      border-top: 1px solid var(--border);
+      background: linear-gradient(180deg, transparent, rgba(255, 77, 0, 0.02));
+    }
+
+    .notify-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .notify-form {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 2rem;
+      width: 100%;
+      max-width: 460px;
+    }
+
+    .notify-input {
+      flex: 1;
+      padding: 0.9rem 1.25rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .notify-input::placeholder {
+      color: var(--text-dim);
+    }
+
+    .notify-input:focus {
+      border-color: var(--accent-primary);
+    }
+
+    .notify-btn {
+      padding: 0.9rem 1.5rem;
+      background: var(--accent-primary);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .notify-btn:hover {
+      background: var(--accent-glow);
+      transform: translateY(-1px);
+    }
+
+    .notify-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .notify-success {
+      display: none;
+      margin-top: 1.5rem;
+      padding: 1rem 1.5rem;
+      background: var(--accent-green-dim);
+      border: 1px solid rgba(0, 232, 120, 0.2);
+      border-radius: 12px;
+      color: var(--accent-green);
+      font-size: 0.9rem;
+      animation: fadeUp 0.3s ease-out;
+    }
+
+    .notify-success.show {
+      display: block;
+    }
+
+    .notify-privacy {
+      margin-top: 1rem;
+      font-size: 0.75rem;
+      color: var(--text-dim);
+    }
+
+    @media (max-width: 768px) {
+      .notify-form {
+        flex-direction: column;
+      }
+    }
+
     /* ═══════════ FOOTER ═══════════ */
     footer {
       position: relative;
@@ -1887,6 +1982,36 @@
     </div>
   </section>
 
+  <!-- Email Notify Section -->
+  <section class="notify-section" id="notify">
+    <div class="section-inner">
+      <div class="notify-container">
+        <span class="section-label">stay updated</span>
+        <h2 class="section-title">출시 알림 받기</h2>
+        <p class="section-desc" style="text-align: center; margin: 0 auto;">
+          이메일 남겨주시면 출시 즉시 알려드릴게요.
+        </p>
+
+        <form class="notify-form" id="notifyForm">
+          <input
+            type="email"
+            class="notify-input"
+            placeholder="이메일 주소를 입력하세요"
+            required
+            id="emailInput"
+          >
+          <button type="submit" class="notify-btn" id="notifyBtn">알림 신청</button>
+        </form>
+
+        <div class="notify-success" id="notifySuccess">
+          출시되면 가장 먼저 알려드릴게요!
+        </div>
+
+        <p class="notify-privacy">스팸은 보내지 않습니다. 약속합니다.</p>
+      </div>
+    </div>
+  </section>
+
   <!-- Lightbox Modal -->
   <div class="lightbox" id="lightbox">
     <button class="lightbox-close" id="lightboxClose" aria-label="닫기">&times;</button>
@@ -2078,6 +2203,40 @@
       document.getElementById('voteResult').classList.add('show');
       loadVoteCount();
     }
+
+    // ═══════════ EMAIL NOTIFY ═══════════
+    document.getElementById('notifyForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('emailInput').value;
+      const btn = document.getElementById('notifyBtn');
+
+      btn.disabled = true;
+      btn.textContent = '전송 중...';
+
+      if (sb) {
+        try {
+          const { error } = await sb
+            .from('emails')
+            .insert({ email });
+
+          if (error) {
+            console.error('Email error:', error);
+            btn.textContent = '다시 시도';
+            btn.disabled = false;
+            return;
+          }
+        } catch (err) {
+          console.error('Email failed:', err);
+          btn.textContent = '다시 시도';
+          btn.disabled = false;
+          return;
+        }
+      }
+
+      btn.textContent = '완료!';
+      document.getElementById('notifySuccess').classList.add('show');
+      document.getElementById('notifyForm').style.display = 'none';
+    });
 
     // ═══════════ LIGHTBOX ═══════════
     const lightbox = document.getElementById('lightbox');
