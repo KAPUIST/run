@@ -15,7 +15,7 @@ const TEST_STATS: RunStats = {
   distance: '5.2',
   pace: "5'42\"",
   time: '28:14',
-  date: new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' }),
+  date: new Date().toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' }),
 };
 
 async function main() {

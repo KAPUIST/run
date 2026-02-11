@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="0" fill="#07070B"/>
+  <circle cx="256" cy="240" r="180" fill="#FF4D00"/>
+  <text x="256" y="295" font-size="220" font-family="sans-serif" font-weight="900" fill="white" text-anchor="middle">뛰</text>
+</svg>

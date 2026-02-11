@@ -1,24 +1,24 @@
 'use client';
 
-import { STYLE_CONFIGS } from '@/lib/gemini';
+import { STYLE_CONFIGS } from '@/lib/styles';
 
 // UI 전용 메타데이터 (STYLE_CONFIGS에 없는 표시용 정보)
-const STYLE_UI_META: Record<string, { emoji: string; tag: string; tagClass?: string }> = {
-  crayon:         { emoji: '🖍️', tag: '귀여움' },
-  catface:        { emoji: '🐱', tag: '인기 1위', tagClass: 'hot' },
-  minecraft:      { emoji: '⛏️', tag: 'Fun', tagClass: 'hot' },
-  animalcrossing: { emoji: '🏝️', tag: 'NEW', tagClass: 'new' },
-  gta:            { emoji: '🔫', tag: 'Cool' },
-  pixel:          { emoji: '👾', tag: 'Retro' },
-  magazine:       { emoji: '📰', tag: 'Epic' },
-  nike:           { emoji: '✨', tag: 'MZ Pick', tagClass: 'hot' },
+const STYLE_UI_META: Record<string, { emoji: string }> = {
+  crayon:         { emoji: '🖍️' },
+  catface:        { emoji: '🐱' },
+  gta:            { emoji: '🔫' },
+  pixel:          { emoji: '👾' },
+  magazine:       { emoji: '📰' },
+  manhwa:         { emoji: '📖' },
+  receipt:        { emoji: '🧾' },
+  film:           { emoji: '🎞️' },
 };
 
 // STYLE_CONFIGS에서 동적 생성 — 스타일 추가/삭제 시 자동 반영
 const STYLE_OPTIONS = Object.entries(STYLE_CONFIGS).map(([id, config]) => ({
   id,
   name: config.name,
-  ...(STYLE_UI_META[id] || { emoji: '🎨', tag: '' }),
+  ...(STYLE_UI_META[id] || { emoji: '🎨' }),
 }));
 
 interface StyleSelectorProps {
@@ -44,11 +44,6 @@ export default function StyleSelector({ selectedStyle, onSelect }: StyleSelector
             <div className="flex flex-col items-center gap-2 py-5 px-2">
               <span className="text-3xl">{style.emoji}</span>
               <span className="text-xs font-bold text-[var(--text-primary)]">{style.name}</span>
-              {style.tag && (
-                <span className="text-[0.5rem] px-1.5 py-0.5 rounded-full bg-[rgba(255,77,0,0.12)] text-[var(--accent-primary)] font-mono">
-                  {style.tag}
-                </span>
-              )}
             </div>
             {selectedStyle === style.id && (
               <div className="absolute top-2 right-2 w-5 h-5 rounded-full bg-[var(--accent-primary)] flex items-center justify-center">

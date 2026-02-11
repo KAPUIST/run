@@ -1092,166 +1092,20 @@
     }
 
     /* ═══════════ VOTE SECTION ═══════════ */
-    .vote-section {
-      border-top: 1px solid var(--border);
-    }
-
-    .vote-container {
-      margin-top: 3rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-    }
-
-    .vote-question {
-      font-family: var(--font-body);
-      font-weight: 900;
-      font-size: clamp(1.5rem, 3vw, 2.5rem);
-      margin-bottom: 0.75rem;
-      letter-spacing: -0.02em;
-    }
-
-    .vote-sub {
-      color: var(--text-secondary);
-      font-size: 0.95rem;
-      margin-bottom: 3rem;
-      font-weight: 300;
-    }
-
-    .vote-buttons {
-      display: flex;
-      gap: 1.5rem;
-      margin-bottom: 2.5rem;
-    }
-
-    .vote-btn {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.75rem;
-      padding: 2rem 3.5rem;
-      background: linear-gradient(145deg, rgba(255, 77, 0, 0.08), rgba(255, 77, 0, 0.03));
-      color: var(--text-primary);
-      border: 2px solid rgba(255, 77, 0, 0.3);
-      border-radius: 20px;
-      cursor: pointer;
-      transition: all 0.2s cubic-bezier(0.22, 1, 0.36, 1);
-      min-width: 200px;
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 0 20px rgba(255, 77, 0, 0.06);
-      animation: btnPulse 2.5s ease-in-out infinite;
-    }
-
-    @keyframes btnPulse {
-      0%, 100% { box-shadow: 0 0 20px rgba(255, 77, 0, 0.06); }
-      50% { box-shadow: 0 0 30px rgba(255, 77, 0, 0.12); }
-    }
-
-    .vote-btn:active {
-      transform: scale(0.96);
-      box-shadow: 0 0 10px rgba(255, 77, 0, 0.2);
-    }
-
-    .vote-btn::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-
-    .vote-btn--yes::before {
-      background: radial-gradient(circle at center, rgba(255, 77, 0, 0.08), transparent);
-    }
-
-    .vote-btn--maybe::before {
-      background: radial-gradient(circle at center, rgba(0, 232, 120, 0.06), transparent);
-    }
-
-    .vote-btn:hover {
-      transform: translateY(-4px);
-    }
-
-    .vote-btn--yes:hover {
-      border-color: var(--accent-primary);
-      background: linear-gradient(145deg, rgba(255, 77, 0, 0.15), rgba(255, 77, 0, 0.06));
-      box-shadow: 0 8px 40px rgba(255, 77, 0, 0.2);
-      transform: translateY(-4px) scale(1.02);
-      animation: none;
-    }
-
-    .vote-btn.voted {
-      pointer-events: none;
-    }
-
-    .vote-btn--yes.voted {
-      border-color: var(--accent-primary);
-      background: rgba(255, 77, 0, 0.06);
-    }
-
-    .vote-btn--maybe.voted {
-      border-color: var(--accent-green);
-      background: rgba(0, 232, 120, 0.04);
-    }
-
-    .vote-emoji {
-      font-size: 2rem;
-      transition: transform 0.3s;
-    }
-
-    .vote-btn:hover .vote-emoji {
-      transform: scale(1.3) rotate(-5deg);
-    }
-
-    .vote-label {
-      font-weight: 700;
-      font-size: 0.95rem;
-    }
-
-    .vote-count {
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      color: var(--text-dim);
-    }
-
-    .vote-result {
-      display: none;
-      animation: fadeUp 0.4s ease-out;
-    }
-
-    .vote-result.show {
-      display: block;
-    }
-
-    .vote-thanks {
-      font-size: 1.1rem;
-      color: var(--text-primary);
-      margin-bottom: 0.5rem;
-      font-weight: 500;
-    }
-
-    .vote-thanks-sub {
-      color: var(--text-secondary);
-      font-size: 0.9rem;
-      font-weight: 300;
-    }
-
-    /* ═══════════ NOTIFY FORM ═══════════ */
-    .notify-section {
+    /* ═══════════ FEEDBACK SECTION ═══════════ */
+    .feedback-section {
       border-top: 1px solid var(--border);
       background: linear-gradient(180deg, transparent, rgba(255, 77, 0, 0.02));
     }
 
-    .notify-container {
+    .feedback-container {
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
     }
 
-    .notify-form {
+    .feedback-form {
       display: flex;
       flex-direction: column;
       gap: 0.75rem;
@@ -1260,8 +1114,47 @@
       max-width: 460px;
     }
 
-    .notify-input {
-      flex: 1;
+    .feedback-styles {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .feedback-chip {
+      cursor: pointer;
+    }
+
+    .feedback-chip input {
+      display: none;
+    }
+
+    .chip-inner {
+      display: inline-block;
+      padding: 0.6rem 1rem;
+      background: var(--bg-card);
+      border: 1.5px solid var(--border);
+      border-radius: 100px;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      transition: all 0.2s;
+      user-select: none;
+    }
+
+    .chip-inner:hover {
+      border-color: var(--text-dim);
+      color: var(--text-primary);
+    }
+
+    .feedback-chip input:checked + .chip-inner {
+      border-color: var(--accent-primary);
+      background: rgba(255, 77, 0, 0.1);
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    .feedback-input {
       padding: 0.9rem 1.25rem;
       background: var(--bg-card);
       border: 1px solid var(--border);
@@ -1273,15 +1166,27 @@
       transition: border-color 0.2s;
     }
 
-    .notify-input::placeholder {
+    .feedback-input::placeholder {
       color: var(--text-dim);
     }
 
-    .notify-input:focus {
+    .feedback-input:focus {
       border-color: var(--accent-primary);
     }
 
-    .notify-btn {
+    .feedback-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 0.5rem 0;
+    }
+
+    .feedback-notify-label {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-bottom: -0.25rem;
+    }
+
+    .feedback-btn {
       padding: 0.9rem 1.5rem;
       background: var(--accent-primary);
       color: white;
@@ -1295,18 +1200,18 @@
       white-space: nowrap;
     }
 
-    .notify-btn:hover {
+    .feedback-btn:hover {
       background: var(--accent-glow);
       transform: translateY(-1px);
     }
 
-    .notify-btn:disabled {
+    .feedback-btn:disabled {
       opacity: 0.5;
       cursor: not-allowed;
       transform: none;
     }
 
-    .notify-success {
+    .feedback-success {
       display: none;
       margin-top: 1.5rem;
       padding: 1rem 1.5rem;
@@ -1318,20 +1223,8 @@
       animation: fadeUp 0.3s ease-out;
     }
 
-    .notify-success.show {
+    .feedback-success.show, .feedback-success[style*="block"] {
       display: block;
-    }
-
-    .notify-privacy {
-      margin-top: 1rem;
-      font-size: 0.75rem;
-      color: var(--text-dim);
-    }
-
-    @media (max-width: 768px) {
-      .notify-form {
-        flex-direction: column;
-      }
     }
 
     /* ═══════════ FOOTER ═══════════ */
@@ -1780,16 +1673,15 @@
             <div class="phone-slideshow">
               <img src="images/style-webtoon.png" class="phone-slide active" alt="웹툰 스타일">
               <img src="images/style-catface.png" class="phone-slide" alt="고양이 변신">
-              <img src="images/style-comic.png" class="phone-slide" alt="만화 스타일">
+
               <img src="images/style-magazine.png" class="phone-slide" alt="매거진 커버">
-              <img src="images/style-nike.png" class="phone-slide" alt="나이키 룩">
+              <img src="images/style-pixel.png" class="phone-slide" alt="픽셀아트">
               <img src="images/style-crayon.png" class="phone-slide" alt="크레용 그림">
               <img src="images/style-minecraft.png" class="phone-slide" alt="마인크래프트">
             </div>
             <div class="phone-slide-label" id="slideLabel">웹툰 스타일</div>
             <div class="phone-slide-indicator" id="slideIndicator">
               <span class="slide-dot active"></span>
-              <span class="slide-dot"></span>
               <span class="slide-dot"></span>
               <span class="slide-dot"></span>
               <span class="slide-dot"></span>
@@ -1879,19 +1771,6 @@
           </div>
         </div>
 
-        <!-- #2 만화 스타일 -->
-        <div class="tpl-card reveal reveal-delay-1">
-          <div class="tpl-phone">
-            <div class="tpl-screen tpl-screen--img">
-              <img src="images/style-comic.png" class="tpl-img" alt="만화 스타일" loading="lazy">
-              <span class="tpl-style-badge">AI Generated</span>
-            </div>
-          </div>
-          <div class="tpl-meta">
-            <span class="tpl-name">만화 스타일</span>
-            <span class="tpl-tag tpl-tag--mz">MZ Pick</span>
-          </div>
-        </div>
 
         <!-- #3 매거진 커버 -->
         <div class="tpl-card reveal reveal-delay-2">
@@ -1907,16 +1786,16 @@
           </div>
         </div>
 
-        <!-- #4 나이키 룩 -->
+        <!-- #4 픽셀아트 -->
         <div class="tpl-card reveal reveal-delay-3">
           <div class="tpl-phone">
             <div class="tpl-screen tpl-screen--img">
-              <img src="images/style-nike.png" class="tpl-img" alt="나이키 룩" loading="lazy">
+              <img src="images/style-pixel.png" class="tpl-img" alt="픽셀아트" loading="lazy">
               <span class="tpl-style-badge">AI Generated</span>
             </div>
           </div>
           <div class="tpl-meta">
-            <span class="tpl-name">나이키 룩</span>
+            <span class="tpl-name">픽셀아트</span>
             <span class="tpl-tag">Cool</span>
           </div>
         </div>
@@ -1958,72 +1837,67 @@
   </section>
 
   <!-- Vote Section -->
-  <section class="vote-section" id="vote">
+  <!-- Feedback Section -->
+  <section class="feedback-section" id="feedback">
     <div class="section-inner">
-      <div class="vote-container">
-        <span class="section-label">러너가 결정합니다</span>
-        <h2 class="vote-question">이런 인증 방식,<br>실제로 쓸 것 같으세요?</h2>
-        <p class="vote-sub">투표 결과로 실제 기능 우선순위를 정합니다.<br>러너분들이 만드는 서비스예요.</p>
-
-        <div class="vote-buttons" id="voteButtons">
-          <button class="vote-btn vote-btn--yes" data-vote="yes" onclick="handleVote('yes')">
-            <span class="vote-emoji">🔥</span>
-            <div>
-              <div class="vote-label">이거 쓸 것 같다</div>
-              <div class="vote-count" id="countYes">0</div>
-            </div>
-          </button>
-        </div>
-
-        <div class="vote-result" id="voteResult">
-          <p class="vote-thanks">의견 감사합니다!</p>
-          <p class="vote-thanks-sub">아래에서 베타 테스터로 먼저 써보실 수 있어요 👇</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Email Notify Section -->
-  <section class="notify-section" id="notify">
-    <div class="section-inner">
-      <div class="notify-container">
-        <span class="section-label">beta tester</span>
-        <h2 class="section-title">베타 테스터 신청</h2>
-        <p class="section-desc" style="text-align: center; margin: 0 auto;">
-          신청하신 분들께 <strong style="color: var(--accent-primary);">무료 베타</strong>를 가장 먼저 보내드립니다.<br>
-          초기 테스터 의견으로 기능을 함께 만들어갈 예정이에요.
+      <div class="feedback-container">
+        <span class="section-label reveal">your voice</span>
+        <h2 class="section-title reveal">다음 스타일,<br>러너가 골라주세요</h2>
+        <p class="section-desc reveal" style="text-align: center; margin: 0 auto;">
+          투표 많은 스타일부터 추가합니다.<br>여러분의 선택이 곧 업데이트예요.
         </p>
 
-        <form class="notify-form" id="notifyForm">
+        <form class="feedback-form" id="feedbackForm">
+          <div class="feedback-styles" id="feedbackStyles">
+            <label class="feedback-chip">
+              <input type="checkbox" name="styles" value="ghibli">
+              <span class="chip-inner">🏔️ 지브리</span>
+            </label>
+            <label class="feedback-chip">
+              <input type="checkbox" name="styles" value="watercolor">
+              <span class="chip-inner">🎨 수채화</span>
+            </label>
+            <label class="feedback-chip">
+              <input type="checkbox" name="styles" value="lego">
+              <span class="chip-inner">🧱 레고</span>
+            </label>
+            <label class="feedback-chip">
+              <input type="checkbox" name="styles" value="popart">
+              <span class="chip-inner">🎭 팝아트</span>
+            </label>
+            <label class="feedback-chip">
+              <input type="checkbox" name="styles" value="nike">
+              <span class="chip-inner">🏃 나이키 캠페인</span>
+            </label>
+            <label class="feedback-chip">
+              <input type="checkbox" name="styles" value="anime">
+              <span class="chip-inner">⚡ 스포츠 애니</span>
+            </label>
+          </div>
+
           <input
             type="text"
-            class="notify-input"
-            placeholder="이름"
-            required
-            id="nameInput"
+            class="feedback-input"
+            placeholder="다른 아이디어가 있다면? (선택)"
+            id="feedbackText"
           >
-          <input
-            type="email"
-            class="notify-input"
-            placeholder="이메일"
-            required
-            id="emailInput"
-          >
+
+          <div class="feedback-divider"></div>
+
+          <p class="feedback-notify-label">새 스타일 나오면 알려드릴까요?</p>
           <input
             type="tel"
-            class="notify-input"
-            placeholder="전화번호 (010-0000-0000)"
-            required
-            id="phoneInput"
+            class="feedback-input"
+            placeholder="전화번호 (선택)"
+            id="feedbackPhone"
           >
-          <button type="submit" class="notify-btn" id="notifyBtn">베타 신청하기</button>
+
+          <button type="submit" class="feedback-btn" id="feedbackBtn">보내기</button>
         </form>
 
-        <div class="notify-success" id="notifySuccess">
-          베타 테스터로 등록되었습니다! 가장 먼저 초대해드릴게요.
+        <div class="feedback-success" id="feedbackSuccess">
+          소중한 의견 감사합니다! 반영해서 업데이트할게요 🙌
         </div>
-
-        <p class="notify-privacy">베타 초대 외에 다른 연락은 드리지 않습니다.</p>
       </div>
     </div>
   </section>
@@ -2065,7 +1939,7 @@
     createSpeedLines();
 
     // ═══════════ PHONE IMAGE SLIDESHOW ═══════════
-    const slideNames = ['웹툰 스타일', '고양이 변신', '만화 스타일', '매거진 커버', '나이키 룩', '크레용 그림', '마인크래프트'];
+    const slideNames = ['웹툰 스타일', '고양이 변신', '매거진 커버', '픽셀아트', '크레용 그림', '마인크래프트'];
     const slides = document.querySelectorAll('.phone-slide');
     const dots = document.querySelectorAll('.slide-dot');
     const slideLabel = document.getElementById('slideLabel');
@@ -2153,7 +2027,7 @@
 
     reveals.forEach(el => observer.observe(el));
 
-    // ═══════════ SUPABASE + VOTE ═══════════
+    // ═══════════ SUPABASE + FEEDBACK ═══════════
     let sb = null;
     try {
       sb = window.supabase.createClient(
@@ -2164,69 +2038,26 @@
       console.warn('Supabase init failed:', e);
     }
 
-    // Load vote count from Supabase
-    async function loadVoteCount() {
-      if (!sb) return;
-      try {
-        const { count, error } = await sb
-          .from('votes')
-          .select('*', { count: 'exact', head: true });
-
-        if (!error && count !== null) {
-          document.getElementById('countYes').textContent = `${count} votes`;
-        }
-      } catch (e) {
-        console.warn('Load votes failed:', e);
-      }
-    }
-    loadVoteCount();
-
-    // Check if already voted (localStorage for duplicate prevention)
-    const hasVoted = localStorage.getItem('ttwi-voted');
-    if (hasVoted) {
-      document.querySelectorAll('.vote-btn').forEach(btn => {
-        btn.classList.add('voted');
-      });
-      document.getElementById('voteResult').classList.add('show');
+    // Check if already submitted feedback
+    if (localStorage.getItem('ttwi-feedback')) {
+      document.getElementById('feedbackForm').style.display = 'none';
+      document.getElementById('feedbackSuccess').style.display = 'block';
     }
 
-    async function handleVote(type) {
-      if (localStorage.getItem('ttwi-voted')) return;
-
-      // Insert to Supabase
-      if (sb) {
-        try {
-          const { error } = await sb
-            .from('votes')
-            .insert({ vote_type: type });
-
-          if (error) {
-            console.error('Vote error:', error);
-            return;
-          }
-        } catch (e) {
-          console.error('Vote failed:', e);
-          return;
-        }
-      }
-
-      localStorage.setItem('ttwi-voted', type);
-
-      document.querySelectorAll('.vote-btn').forEach(btn => {
-        btn.classList.add('voted');
-      });
-
-      document.getElementById('voteResult').classList.add('show');
-      loadVoteCount();
-    }
-
-    // ═══════════ EMAIL NOTIFY ═══════════
-    document.getElementById('notifyForm').addEventListener('submit', async (e) => {
+    document.getElementById('feedbackForm').addEventListener('submit', async (e) => {
       e.preventDefault();
-      const name = document.getElementById('nameInput').value;
-      const email = document.getElementById('emailInput').value;
-      const phone = document.getElementById('phoneInput').value;
-      const btn = document.getElementById('notifyBtn');
+      const btn = document.getElementById('feedbackBtn');
+
+      // Collect selected styles
+      const checked = [...document.querySelectorAll('input[name="styles"]:checked')].map(c => c.value);
+      const text = document.getElementById('feedbackText').value.trim();
+      const phone = document.getElementById('feedbackPhone').value.trim();
+
+      if (checked.length === 0 && !text) {
+        btn.textContent = '스타일을 하나 이상 골라주세요!';
+        setTimeout(() => { btn.textContent = '보내기'; }, 2000);
+        return;
+      }
 
       btn.disabled = true;
       btn.textContent = '전송 중...';
@@ -2234,26 +2065,31 @@
       if (sb) {
         try {
           const { error } = await sb
-            .from('emails')
-            .insert({ name, email, phone });
+            .from('feedback')
+            .insert({
+              styles: checked,
+              text: text || null,
+              phone: phone || null,
+            });
 
           if (error) {
-            console.error('Email error:', error);
+            console.error('Feedback error:', error);
             btn.textContent = '다시 시도';
             btn.disabled = false;
             return;
           }
         } catch (err) {
-          console.error('Email failed:', err);
+          console.error('Feedback failed:', err);
           btn.textContent = '다시 시도';
           btn.disabled = false;
           return;
         }
       }
 
+      localStorage.setItem('ttwi-feedback', 'true');
       btn.textContent = '완료!';
-      document.getElementById('notifySuccess').classList.add('show');
-      document.getElementById('notifyForm').style.display = 'none';
+      document.getElementById('feedbackSuccess').style.display = 'block';
+      document.getElementById('feedbackForm').style.display = 'none';
     });
 
     // ═══════════ LIGHTBOX ═══════════
@@ -2263,9 +2099,9 @@
     const allImages = [
       { src: 'images/style-webtoon.png', name: '웹툰 스타일' },
       { src: 'images/style-catface.png', name: '고양이 변신' },
-      { src: 'images/style-comic.png', name: '만화 스타일' },
+
       { src: 'images/style-magazine.png', name: '매거진 커버' },
-      { src: 'images/style-nike.png', name: '나이키 룩' },
+      { src: 'images/style-pixel.png', name: '픽셀아트' },
       { src: 'images/style-crayon.png', name: '크레용 그림' },
       { src: 'images/style-minecraft.png', name: '마인크래프트' },
     ];
