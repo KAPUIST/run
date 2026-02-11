@@ -3,12 +3,11 @@
 import { useEffect, useRef } from 'react';
 
 export const STYLES = [
-  { src: '/images/style-webtoon.png', name: '웹툰 스타일', tag: 'NEW', tagClass: 'tpl-tag--hot' },
-  { src: '/images/style-catface.png', name: '고양이 변신', tag: '인기 1위', tagClass: 'tpl-tag--hot' },
-
-  { src: '/images/style-magazine.png', name: '매거진 커버', tag: 'Epic', tagClass: '' },
-  { src: '/images/style-pixel.png', name: '픽셀아트', tag: 'Cool', tagClass: '' },
-  { src: '/images/style-crayon.png', name: '크레용 그림', tag: '귀여움', tagClass: 'tpl-tag--mz' },
+  { src: '/images/style-webtoon.png', name: '웹툰 스타일', tag: 'Webtoon', tagClass: '' },
+  { src: '/images/style-catface.png', name: '고양이 변신', tag: 'Cat', tagClass: '' },
+  { src: '/images/style-magazine.png', name: '매거진 커버', tag: 'Magazine', tagClass: '' },
+  { src: '/images/style-pixel.png', name: '픽셀아트', tag: 'Pixel', tagClass: '' },
+  { src: '/images/style-crayon.png', name: '크레용 그림', tag: 'Crayon', tagClass: '' },
 ];
 
 interface StyleGalleryProps {

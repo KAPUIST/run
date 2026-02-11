@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, FormEvent } from 'react';
+import { useState, FormEvent } from 'react';
 import { supabase } from '@/lib/supabase';
 
 export default function FeedbackForm() {
@@ -9,12 +9,6 @@ export default function FeedbackForm() {
   const [phone, setPhone] = useState('');
   const [text, setText] = useState('');
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
-
-  useEffect(() => {
-    if (localStorage.getItem('ttwi-feedback')) {
-      setStatus('success');
-    }
-  }, []);
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
@@ -41,8 +35,12 @@ export default function FeedbackForm() {
       return;
     }
 
-    localStorage.setItem('ttwi-feedback', 'true');
     setStatus('success');
+    setName('');
+    setEmail('');
+    setPhone('');
+    setText('');
+    setTimeout(() => setStatus('idle'), 3000);
   }
 
   return (

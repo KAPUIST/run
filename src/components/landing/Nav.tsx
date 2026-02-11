@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect } from 'react';
-import Link from 'next/link';
 
 export default function Nav() {
   useEffect(() => {
@@ -20,10 +19,10 @@ export default function Nav() {
 
   return (
     <nav>
-      <Link href="/" className="nav-logo">
+      <a href="/" className="nav-logo">
         <span className="logo-accent">뛰</span>어<span className="logo-dot"></span>
-      </Link>
-      <span className="nav-tag">coming soon</span>
+      </a>
+      <span className="nav-tag">BETA</span>
     </nav>
   );
 }
